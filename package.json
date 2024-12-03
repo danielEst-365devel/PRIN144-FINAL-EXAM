@@ -1,0 +1,19 @@
+{
+  "name": "demo-09-db-integration",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@vercel/postgres": "^0.10.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "swagger-ui-express": "^4.6.2",
+    "yaml": "^2.6.1"
+  }
+}

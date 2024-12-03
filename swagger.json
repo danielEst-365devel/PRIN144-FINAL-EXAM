@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "PRIN135-Demo-10-OpenAPI",
+    "version": "1.0",
+    "description": "Description",
+    "contact": {
+      "email": "estrella2130511@mls.ceu.edu.ph",
+      "name": "Daniel Anthony Estrella"
+    }
+  },
+  "externalDocs": {
+    "url": "swagger.json",
+    "description": "swagger.json"
+  },
+  "servers": [
+    {
+      "url": "https://estrella-demo09.vercel.app",
+      "variables": {},
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/tasks": {
+      "get": {
+        "summary": "Returns all tasks.",
+        "description": "Returns all tasks.",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "Task Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskGetResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      },
+      "post": {
+        "summary": "Creates a task",
+        "description": "Creates a task",
+        "operationId": "",
+        "requestBody": {
+          "description": "Post description",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      }
+    },
+    "/tasks{id}": {
+      "get": {
+        "summary": "Returns a task by specified id.",
+        "description": "Returns a task by specified id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the task.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "Task Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskGetResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      },
+      "put": {
+        "summary": "Updates a task by specified id.",
+        "description": "Updates a task by specified id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the task.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "operationId": "",
+        "requestBody": {
+          "description": "Update description",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskGetResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a task by specified id.",
+        "description": "Deletes a task by specified id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the task.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "Task successfully deleted"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TaskCreateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "TaskUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "isDone": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TaskGetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "isDone": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

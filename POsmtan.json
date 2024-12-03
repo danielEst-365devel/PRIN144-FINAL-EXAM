@@ -1,0 +1,97 @@
+{
+    "info": {
+        "name": "Food Menu API",
+        "description": "API for managing food menu items",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Get All Menu Items",
+            "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/menu",
+                "description": "Returns all menu items"
+            }
+        },
+        {
+            "name": "Get Menu Item by ID",
+            "request": {
+                "method": "GET", 
+                "url": "{{baseUrl}}/menu/:id",
+                "description": "Returns a specific menu item by ID",
+                "variable": [
+                    {
+                        "key": "id",
+                        "value": "",
+                        "description": "ID of the menu item"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Create Menu Item",
+            "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/menu",
+                "description": "Creates a new menu item",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"menu\": \"Pizza\",\n  \"category\": \"Main Course\",\n  \"price\": 12.99,\n  \"isavailable\": true,\n  \"preparationtimeminutes\": 20\n}"
+                }
+            }
+        },
+        {
+            "name": "Update Menu Item",
+            "request": {
+                "method": "PUT",
+                "url": "{{baseUrl}}/menu/:id",
+                "description": "Updates an existing menu item",
+                "variable": [
+                    {
+                        "key": "id",
+                        "value": "",
+                        "description": "ID of the menu item to update"
+                    }
+                ],
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"menu\": \"Updated Pizza\",\n  \"category\": \"Main Course\",\n  \"price\": 14.99,\n  \"isavailable\": true,\n  \"preparationtimeminutes\": 25\n}"
+                }
+            }
+        },
+        {
+            "name": "Delete Menu Item",
+            "request": {
+                "method": "DELETE",
+                "url": "{{baseUrl}}/menu/:id",
+                "description": "Deletes a menu item",
+                "variable": [
+                    {
+                        "key": "id",
+                        "value": "",
+                        "description": "ID of the menu item to delete"
+                    }
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "https://finalsprin144.vercel.app",
+            "type": "string"
+        }
+    ]
+}
