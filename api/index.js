@@ -21,32 +21,124 @@ app.get('/', (req, res) => {
         <!DOCTYPE html>
         <html>
             <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+                <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
                 <style>
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
                     body {
-                        font-family: Arial, sans-serif;
+                        font-family: 'Poppins', sans-serif;
+                        min-height: 100vh;
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        height: 100vh;
-                        margin: 0;
-                        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                        background: #0a192f;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    #particles-js {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 1;
                     }
                     .container {
-                        background: white;
-                        padding: 2rem 4rem;
-                        border-radius: 10px;
-                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        background: rgba(17, 34, 64, 0.95);
+                        padding: 3rem 5rem;
+                        border-radius: 20px;
+                        box-shadow: 0 0 30px rgba(100, 255, 218, 0.1);
+                        position: relative;
+                        z-index: 2;
+                        backdrop-filter: blur(10px);
+                        border: 1px solid rgba(100, 255, 218, 0.1);
+                        transition: all 0.3s ease;
+                    }
+                    .container:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 0 50px rgba(100, 255, 218, 0.2);
                     }
                     h1 {
-                        color: #333;
+                        color: #e6f1ff;
                         text-align: center;
+                        font-size: 2.5rem;
+                        font-weight: 600;
+                        margin-bottom: 1rem;
+                        position: relative;
+                        padding-bottom: 1rem;
+                        opacity: 0;
+                    }
+                    h1::after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 60px;
+                        height: 4px;
+                        background: linear-gradient(90deg, #64ffda, #00ff9d);
+                        border-radius: 2px;
+                    }
+                    span {
+                        color: #64ffda !important;
+                    }
+                    @media (max-width: 768px) {
+                        .container {
+                            padding: 2rem;
+                            margin: 1rem;
+                        }
+                        h1 {
+                            font-size: 1.8rem;
+                        }
                     }
                 </style>
             </head>
             <body>
+                <div id="particles-js"></div>
                 <div class="container">
-                    <h1>PRIN144-Final-Exam: DANIEL ESTRELLA</h1>
+                    <h1 class="typing">PRIN144-Final-Exam:<br><span>DANIEL ESTRELLA</span></h1>
                 </div>
+
+                <script>
+                    // Particle.js configuration
+                    particlesJS('particles-js', {
+                        particles: {
+                            number: { value: 80 },
+                            color: { value: '#64ffda' },
+                            shape: { type: 'circle' },
+                            opacity: { value: 0.5 },
+                            size: { value: 3 },
+                            move: {
+                                enable: true,
+                                speed: 2
+                            }
+                        }
+                    });
+
+                    // Typing animation
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const h1 = document.querySelector('h1');
+                        h1.style.opacity = '0';
+                        setTimeout(() => {
+                            h1.style.transition = 'opacity 1s ease';
+                            h1.style.opacity = '1';
+                        }, 500);
+                    });
+
+                    // Add hover glow effect
+                    const container = document.querySelector('.container');
+                    container.addEventListener('mousemove', (e) => {
+                        const { x, y } = container.getBoundingClientRect();
+                        const mouseX = e.clientX - x;
+                        const mouseY = e.clientY - y;
+                        container.style.setProperty('--x', mouseX + 'px');
+                        container.style.setProperty('--y', mouseY + 'px');
+                    });
+                </script>
             </body>
         </html>
     `;
