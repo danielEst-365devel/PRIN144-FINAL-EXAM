@@ -1,12 +1,12 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "PRIN135-Demo-10-OpenAPI",
+    "title": "PRIN144-Final-Exam",
     "version": "1.0",
-    "description": "Description",
+    "description": "Food Menu Management API",
     "contact": {
-      "email": "estrella2130511@mls.ceu.edu.ph",
-      "name": "Daniel Anthony Estrella"
+      "name": "DANIEL ESTRELLA",
+      "email": "your.email@students.ceu.edu.ph"
     }
   },
   "externalDocs": {
@@ -15,209 +15,229 @@
   },
   "servers": [
     {
-      "url": "https://estrella-demo09.vercel.app",
+      "url": "https://finalsprin144.vercel.app/",
       "variables": {},
       "description": "Production"
     }
   ],
   "paths": {
-    "/tasks": {
+    "/menu": {
       "get": {
-        "summary": "Returns all tasks.",
-        "description": "Returns all tasks.",
-        "operationId": "",
+        "summary": "Returns all menu items",
+        "description": "Returns all menu items or a specific item by ID query parameter",
         "responses": {
           "200": {
-            "description": "Task Found",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TaskGetResponse"
+                    "$ref": "#/components/schemas/MenuItemResponse"
                   }
                 }
               }
             }
           },
           "404": {
-            "description": "Task not found"
-          },
-          "default": {
-            "description": "Default error sample response"
+            "description": "Menu item not found"
           }
         },
-        "tags": [
-          "Tasks"
-        ]
+        "tags": ["Menu"]
       },
       "post": {
-        "summary": "Creates a task",
-        "description": "Creates a task",
-        "operationId": "",
+        "summary": "Creates a new menu item",
+        "description": "Creates a new menu item record",
         "requestBody": {
-          "description": "Post description",
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TaskCreateRequest"
+                "$ref": "#/components/schemas/MenuItemCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "default": {
-            "description": "Default error sample response"
+          "201": {
+            "description": "Menu item created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "tags": [
-          "Tasks"
-        ]
+        "tags": ["Menu"]
       }
     },
-    "/tasks{id}": {
+    "/menu/{id}": {
       "get": {
-        "summary": "Returns a task by specified id.",
-        "description": "Returns a task by specified id.",
+        "summary": "Returns a menu item by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the task.",
             "required": true,
             "schema": {
               "type": "integer"
             }
           }
         ],
-        "operationId": "",
         "responses": {
           "200": {
-            "description": "Task Found",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TaskGetResponse"
+                  "$ref": "#/components/schemas/MenuItemResponse"
                 }
               }
             }
           },
           "404": {
-            "description": "Task not found"
+            "description": "Menu item not found"
           }
         },
-        "tags": [
-          "Tasks"
-        ]
+        "tags": ["Menu"]
       },
       "put": {
-        "summary": "Updates a task by specified id.",
-        "description": "Updates a task by specified id.",
+        "summary": "Updates a menu item",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the task.",
             "required": true,
             "schema": {
               "type": "integer"
             }
           }
         ],
-        "operationId": "",
         "requestBody": {
-          "description": "Update description",
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TaskUpdateRequest"
+                "$ref": "#/components/schemas/MenuItemUpdateRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Task Found",
+            "description": "Menu item updated successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TaskGetResponse"
+                  "$ref": "#/components/schemas/MenuItemResponse"
                 }
               }
             }
           },
           "404": {
-            "description": "Task not found"
-          },
-          "default": {
-            "description": "Default error sample response"
+            "description": "Menu item not found"
           }
         },
-        "tags": [
-          "Tasks"
-        ]
+        "tags": ["Menu"]
       },
       "delete": {
-        "summary": "Deletes a task by specified id.",
-        "description": "Deletes a task by specified id.",
+        "summary": "Deletes a menu item",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the task.",
             "required": true,
             "schema": {
               "type": "integer"
             }
           }
         ],
-        "operationId": "",
         "responses": {
-          "200": {
-            "description": "Task successfully deleted"
+          "204": {
+            "description": "Menu item deleted successfully"
           },
           "404": {
-            "description": "Task not found"
+            "description": "Menu item not found"
           }
         },
-        "tags": [
-          "Tasks"
-        ]
+        "tags": ["Menu"]
       }
     }
   },
   "components": {
     "schemas": {
-      "TaskCreateRequest": {
+      "MenuItemCreateRequest": {
         "type": "object",
+        "required": ["menu", "category", "price"],
         "properties": {
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "TaskUpdateRequest": {
-        "type": "object",
-        "properties": {
-          "name": {
+          "menu": {
             "type": "string"
           },
-          "isDone": {
-            "type": "boolean"
+          "category": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "isavailable": {
+            "type": "boolean",
+            "default": true
+          },
+          "preparationtimeminutes": {
+            "type": "integer"
           }
         }
       },
-      "TaskGetResponse": {
+      "MenuItemUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "menu": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "isavailable": {
+            "type": "boolean"
+          },
+          "preparationtimeminutes": {
+            "type": "integer"
+          }
+        }
+      },
+      "MenuItemResponse": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer"
           },
-          "name": {
+          "menu": {
             "type": "string"
           },
-          "isDone": {
+          "category": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "isavailable": {
             "type": "boolean"
+          },
+          "preparationtimeminutes": {
+            "type": "integer"
           }
         }
       }
